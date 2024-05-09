@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: rgb(20, 20, 20);
+  max-width: 60%;
+  margin: 0 auto;
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    max-width: 65%;
+  }
+}
+
+@media (max-width: 425px) {
+  :root {
+    max-width: 80%;
+  }
+}
