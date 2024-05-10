@@ -3,8 +3,8 @@ import { Item } from "./Item";
 
 export const Items = () => {
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-      {data.map(({ book }) => (
+    <section className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      {data.library.map(({ book }) => (
         <Item
           key={book.ISBN}
           title={book.title}
@@ -13,6 +13,6 @@ export const Items = () => {
           synopsis={book.synopsis}
         />
       ))}
-    </div>
+    </section>
   );
 };

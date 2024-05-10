@@ -5,14 +5,13 @@ import { Navbar } from "./components/Navbar";
 import { List } from "./components/List";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("books");
+  const [selectList, setSelectList] = useState(false);
 
   return (
     <>
       <Header />
-      <Navbar setActiveTab={setActiveTab} />
-      {activeTab === "books" && <Items />}
-      {activeTab === "list" && <List />}
+      <Navbar selectList={selectList} setSelectList={setSelectList} />
+      <main className="py-2">{!selectList ? <Items /> : <List />}</main>
     </>
   );
 }
