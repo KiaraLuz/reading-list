@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AddBook, DeleteBook } from "../Icons";
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 export const Item = ({ title, genre, cover, synopsis }) => {
   const [add, setAdd] = useState(true);
 

@@ -1,6 +1,5 @@
-import data from "../data/books.json";
-// eslint-disable-next-line react/prop-types
-export const Navbar = ({ selectList, setSelectList }) => {
+/* eslint-disable react/prop-types */
+export const Navbar = ({ selectList, setSelectList, filteredCount }) => {
   const getSpanClass = (isSelected) => {
     return `cursor-pointer px-4 py-1 ${
       isSelected ? "bg-zinc-800 rounded-t-md" : ""
@@ -13,7 +12,7 @@ export const Navbar = ({ selectList, setSelectList }) => {
         onClick={() => setSelectList(false)}
         className={getSpanClass(!selectList)}
       >
-        Libros disponibles ({data.library.length})
+        Libros disponibles ({filteredCount})
       </span>
       <span
         onClick={() => setSelectList(true)}
