@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-export const Navbar = ({ selectList, setSelectList, filteredCount }) => {
+export const Navbar = ({ showList, setShowList, filteredBooksCount }) => {
   const getSpanClass = (isSelected) => {
     return `cursor-pointer px-4 py-1 ${
       isSelected ? "bg-zinc-800 rounded-t-md" : ""
@@ -9,14 +9,14 @@ export const Navbar = ({ selectList, setSelectList, filteredCount }) => {
   return (
     <nav className="flex gap-4 py-2 text-sm sm:text-base">
       <span
-        onClick={() => setSelectList(false)}
-        className={getSpanClass(!selectList)}
+        onClick={() => setShowList(false)}
+        className={getSpanClass(!showList)}
       >
-        Libros disponibles ({filteredCount})
+        Libros disponibles ({filteredBooksCount})
       </span>
       <span
-        onClick={() => setSelectList(true)}
-        className={getSpanClass(selectList)}
+        onClick={() => setShowList(true)}
+        className={getSpanClass(showList)}
       >
         Lista de lectura
       </span>

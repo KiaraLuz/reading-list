@@ -3,49 +3,41 @@ import { useEffect, useState } from "react";
 import data from "./../data/books.json";
 import { Item } from "./Item";
 
-export const Items = ({ searchBook, setFilteredCount }) => {
+export const Items = ({
+  searchQuery,
+  setFilteredBooksCount,
+  handleItemClick,
+}) => {
   const [filteredBooks, setFilteredBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchFilteredBooks = async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
         const filteredBooks = data.library.filter(({ book }) =>
-          book.title.toLowerCase().includes(searchBook.toLowerCase())
+          book.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredBooks(filteredBooks);
-        setFilteredCount(filteredBooks.length);
-        setLoading(false);
-        setError(null);
+        setFilteredBooksCount(filteredBooks.length);
+        setIsLoading(false);
       } catch (error) {
-        setLoading(false);
-        setError(error.message);
+        console.error(error);
+        setIsLoading(false);
       }
     };
-    fetchBooks();
-  }, [searchBook, setFilteredCount]);
+    fetchFilteredBooks();
+  }, [searchQuery, setFilteredBooksCount]);
 
   return (
     <section className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 relative">
-      {loading && <p className="absolute top-5">Cargando...</p>}
+      {isLoading && <p className="absolute top-5">Cargando...</p>}
 
-      {error && (
-        <p className="absolute top-5 text-red-500">Ha ocurrido un error</p>
-      )}
-
-      {!loading && !error && (
+      {!isLoading && (
         <>
           {filteredBooks.length !== 0 ? (
             filteredBooks.map(({ book }) => (
-              <Item
-                key={book.ISBN}
-                title={book.title}
-                genre={book.genre}
-                cover={book.cover}
-                synopsis={book.synopsis}
-              />
+              <Item key={book.ISBN} book={book} onClick={handleItemClick} />
             ))
           ) : (
             <p className="absolute top-5">

@@ -2,25 +2,31 @@ import { useState } from "react";
 import { AddBook, DeleteBook } from "../Icons";
 
 /* eslint-disable react/prop-types */
-export const Item = ({ title, genre, cover, synopsis }) => {
-  const [add, setAdd] = useState(true);
+export const Item = ({ book: item, onClick }) => {
+  const { title, synopsis, genre, cover } = item;
+
+  const [isAdded, setIsAdded] = useState(true);
+  const handleAddClick = () => setIsAdded(!isAdded);
 
   return (
-    <article className="flex flex-col gap-2">
+    <article
+      className="flex flex-col items-center gap-2"
+      onClick={() => onClick(item)}
+    >
       <img
         src={cover}
         alt={`Libro ${title}`}
-        className={`h-64 object-cover ${
-          !add ? "filter grayscale brightness-50" : ""
+        className={`h-64 w-full object-cover rounded-lg ${
+          !isAdded && "filter grayscale brightness-50"
         }`}
       />
-      <div className="flex justify-between">
-        <h2>{title}</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="font-semibold">{title}</h2>
         <button
           className="flex justify-center items-center h-8 min-w-8 rounded-md bg-zinc-800"
-          onClick={() => setAdd(!add)}
+          onClick={handleAddClick}
         >
-          {add ? <AddBook /> : <DeleteBook />}
+          {isAdded ? <AddBook /> : <DeleteBook />}
         </button>
       </div>
       <div className="text-sm">

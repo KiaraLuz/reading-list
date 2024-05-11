@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-export const Filter = ({ onSearch }) => {
+export const Filter = ({ handleSearch }) => {
   const handleSearchChange = (event) => {
-    onSearch(event.target.value);
+    handleSearch(event.target.value);
   };
 
   return (

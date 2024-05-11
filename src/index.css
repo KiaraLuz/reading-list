@@ -9,10 +9,21 @@
   color: white;
 }
 
-.btn-genre {
+.btn-genre,
+.btn-others {
   background-color: rgb(197, 107, 224);
   padding: 0 8px;
   border-radius: 9999px;
+  width: auto;
+  max-width: fit-content;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-others {
+  background-color: rgb(30, 30, 30);
 }
 
 body::-webkit-scrollbar {
