@@ -1,5 +1,10 @@
 /* eslint-disable react/prop-types */
-export const Navbar = ({ showList, setShowList, filteredBooksCount }) => {
+export const Navbar = ({
+  showList,
+  setShowList,
+  filteredBooksCount,
+  filteredLocalStorageBooksCount,
+}) => {
   const getSpanClass = (isSelected) => {
     return `cursor-pointer px-4 py-1 ${
       isSelected ? "bg-zinc-800 rounded-t-md" : ""
@@ -18,7 +23,7 @@ export const Navbar = ({ showList, setShowList, filteredBooksCount }) => {
         onClick={() => setShowList(true)}
         className={getSpanClass(showList)}
       >
-        Lista de lectura
+        Lista de lectura ({filteredLocalStorageBooksCount})
       </span>
     </nav>
   );

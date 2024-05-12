@@ -57,6 +57,7 @@ export const Search = () => (
     ></path>
   </svg>
 );
+
 export const Return = () => (
   <svg
     data-slot="icon"

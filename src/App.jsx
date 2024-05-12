@@ -10,6 +10,8 @@ function App() {
   const [showList, setShowList] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBooksCount, setFilteredBooksCount] = useState(0);
+  const [filteredLocalStorageBooksCount, setFilteredLocalStorageBooksCount] =
+    useState(0);
   const [selectedBook, setSelectedBook] = useState(null);
 
   const handleSearchChange = (event) => {
@@ -28,6 +30,7 @@ function App() {
         showList={showList}
         setShowList={setShowList}
         filteredBooksCount={filteredBooksCount}
+        filteredLocalStorageBooksCount={filteredLocalStorageBooksCount}
       />
       <main className="py-2">
         {!showList ? (
@@ -44,7 +47,13 @@ function App() {
             />
           )
         ) : (
-          <List />
+          <List
+            searchQuery={searchQuery}
+            setFilteredLocalStorageBooksCount={
+              setFilteredLocalStorageBooksCount
+            }
+            handleItemClick={handleItemClick}
+          />
         )}
       </main>
     </>

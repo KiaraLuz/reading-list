@@ -1,37 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddBook, DeleteBook } from "../Icons";
+import {
+  addBookToLocalStorage,
+  removeBookFromLocalStorage,
+  bookExistsInLocalStorage,
+} from "../helper/localStorageHelper";
 
 /* eslint-disable react/prop-types */
 export const Item = ({ book: item, onClick }) => {
-  const { title, synopsis, genre, cover } = item;
+  const { title, synopsis, genre, cover, ISBN } = item;
 
-  const [isAdded, setIsAdded] = useState(true);
-  const handleAddClick = () => setIsAdded(!isAdded);
+  const [isInLocalStorage, setIsInLocalStorage] = useState(
+    bookExistsInLocalStorage(ISBN)
+  );
+
+  const handleAddRemoveBook = () => {
+    if (isInLocalStorage) {
+      removeBookFromLocalStorage(ISBN);
+    } else {
+      addBookToLocalStorage(item);
+    }
+    setIsInLocalStorage(!isInLocalStorage);
+  };
+
+  useEffect(() => {
+    setIsInLocalStorage(bookExistsInLocalStorage(ISBN));
+  }, [ISBN]);
 
   return (
-    <article
-      className="flex flex-col items-center gap-2"
-      onClick={() => onClick(item)}
-    >
+    <article className="flex flex-col items-center gap-2">
       <img
         src={cover}
         alt={`Libro ${title}`}
         className={`h-64 w-full object-cover rounded-lg ${
-          !isAdded && "filter grayscale brightness-50"
+          isInLocalStorage && "filter grayscale brightness-50"
         }`}
       />
-      <div className="flex justify-between items-center">
-        <h2 className="font-semibold">{title}</h2>
+
+      <div className="flex justify-between w-full">
+        <h2
+          className="font-semibold cursor-pointer"
+          onClick={() => onClick(item)}
+        >
+          {title}
+        </h2>
         <button
           className="flex justify-center items-center h-8 min-w-8 rounded-md bg-zinc-800"
-          onClick={handleAddClick}
+          onClick={handleAddRemoveBook}
         >
-          {isAdded ? <AddBook /> : <DeleteBook />}
+          {isInLocalStorage ? <DeleteBook /> : <AddBook />}
         </button>
       </div>
+
       <div className="text-sm">
         <span className="btn-genre">{genre}</span>
-        <p className="mt-2 text-zinc-400">{synopsis}</p>
+        <p className="mt-2 text-zinc-400 line-clamp-3">{synopsis}</p>
       </div>
     </article>
   );

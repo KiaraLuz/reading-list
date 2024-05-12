@@ -40,9 +40,7 @@ export const Items = ({
               <Item key={book.ISBN} book={book} onClick={handleItemClick} />
             ))
           ) : (
-            <p className="absolute top-5">
-              No se han encontrado coincidencias, prueba modificar los filtros
-            </p>
+            <p className="absolute top-5">No se han encontrado coincidencias</p>
           )}
         </>
       )}
