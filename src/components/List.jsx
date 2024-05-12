@@ -1,45 +1,36 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Item } from "./Item";
 import { getBooksFromLocalStorage } from "./../helper/localStorageHelper";
+import { useSearch } from "../hooks/useSearch";
 
 export const List = ({
   searchQuery,
-  setFilteredBooksCount,
   handleItemClick,
-  setFilteredLocalStorageBooksCount,
+  setReadingListBooksCount,
 }) => {
-  const [filteredBooks, setFilteredBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { searchResults, isLoading, filteredBooksCount } = useSearch(
+    getBooksFromLocalStorage(),
+    searchQuery
+  );
 
   useEffect(() => {
-    const fetchFilteredBooks = async () => {
-      try {
-        setIsLoading(true);
-        const localStorageBooks = getBooksFromLocalStorage();
-        const filteredBooks = localStorageBooks.filter((book) =>
-          book.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setFilteredBooks(filteredBooks);
-        setFilteredLocalStorageBooksCount(filteredBooks.length);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-        setIsLoading(false);
-      }
-    };
-    fetchFilteredBooks();
-  }, [searchQuery, setFilteredBooksCount]);
-
+    setReadingListBooksCount(filteredBooksCount);
+  }, [filteredBooksCount]);
   return (
     <section className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 relative">
       {isLoading && <p className="absolute top-5">Cargando...</p>}
 
       {!isLoading && (
         <>
-          {filteredBooks.length !== 0 ? (
-            filteredBooks.map((book) => (
-              <Item key={book.ISBN} book={book} onClick={handleItemClick} />
+          {searchResults.length !== 0 ? (
+            searchResults.map((book) => (
+              <Item
+                key={book.ISBN}
+                book={book}
+                onClick={handleItemClick}
+                setReadingListBookCount={setReadingListBooksCount}
+              />
             ))
           ) : (
             <p className="absolute top-5">No se han encontrado coincidencias</p>

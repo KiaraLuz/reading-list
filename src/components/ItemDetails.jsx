@@ -1,33 +1,18 @@
 /* eslint-disable react/prop-types */
-
-import { useEffect, useState } from "react";
 import { AddBook, DeleteBook, Return } from "../Icons";
-import {
-  addBookToLocalStorage,
-  removeBookFromLocalStorage,
-  bookExistsInLocalStorage,
-} from "../helper/localStorageHelper";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export const ItemDetails = ({ handleItemClick, book: item }) => {
+export const ItemDetails = ({
+  handleItemClick,
+  book: item,
+  setReadingListBooksCount,
+}) => {
   const { title, synopsis, genre, cover, year, pages, ISBN, author } = item;
   const { name, otherBooks } = author;
-
-  const [isInLocalStorage, setIsInLocalStorage] = useState(
-    bookExistsInLocalStorage(ISBN)
+  const { isInLocalStorage, handleAddRemoveBook } = useLocalStorage(
+    item,
+    setReadingListBooksCount
   );
-
-  const handleAddRemoveBook = () => {
-    if (isInLocalStorage) {
-      removeBookFromLocalStorage(ISBN);
-    } else {
-      addBookToLocalStorage(item);
-    }
-    setIsInLocalStorage(!isInLocalStorage);
-  };
-
-  useEffect(() => {
-    setIsInLocalStorage(bookExistsInLocalStorage(ISBN));
-  }, [ISBN]);
 
   return (
     <section className="flex gap-8">
@@ -41,7 +26,9 @@ export const ItemDetails = ({ handleItemClick, book: item }) => {
         <img
           src={cover}
           alt={`Libro ${title}`}
-          className="h-96 min-w-72 object-cover rounded-lg"
+          className={`h-96 min-w-72 object-cover rounded-lg ${
+            isInLocalStorage && "filter grayscale brightness-50"
+          }`}
         />
       </div>
 

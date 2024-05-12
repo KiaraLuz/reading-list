@@ -5,14 +5,16 @@ import { Navbar } from "./components/Navbar";
 import { List } from "./components/List";
 import { Filter } from "./components/Filter";
 import { ItemDetails } from "./components/ItemDetails";
+import { getBooksFromLocalStorage } from "./helper/localStorageHelper";
 
 function App() {
   const [showList, setShowList] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredBooksCount, setFilteredBooksCount] = useState(0);
-  const [filteredLocalStorageBooksCount, setFilteredLocalStorageBooksCount] =
-    useState(0);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [totalBooksCount, setTotalBooksCount] = useState(0);
+  const [readingListBooksCount, setReadingListBooksCount] = useState(
+    getBooksFromLocalStorage().length
+  );
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -29,30 +31,30 @@ function App() {
       <Navbar
         showList={showList}
         setShowList={setShowList}
-        filteredBooksCount={filteredBooksCount}
-        filteredLocalStorageBooksCount={filteredLocalStorageBooksCount}
+        totalBooksCount={totalBooksCount}
+        readingListBooksCount={readingListBooksCount}
       />
       <main className="py-2">
         {!showList ? (
           !selectedBook ? (
             <Items
               searchQuery={searchQuery}
-              setFilteredBooksCount={setFilteredBooksCount}
               handleItemClick={handleItemClick}
+              setTotalBooksCount={setTotalBooksCount}
+              setReadingListBooksCount={setReadingListBooksCount}
             />
           ) : (
             <ItemDetails
               handleItemClick={handleItemClick}
               book={selectedBook}
+              setReadingListBooksCount={setReadingListBooksCount}
             />
           )
         ) : (
           <List
             searchQuery={searchQuery}
-            setFilteredLocalStorageBooksCount={
-              setFilteredLocalStorageBooksCount
-            }
             handleItemClick={handleItemClick}
+            setReadingListBooksCount={setReadingListBooksCount}
           />
         )}
       </main>

@@ -2,8 +2,8 @@
 export const Navbar = ({
   showList,
   setShowList,
-  filteredBooksCount,
-  filteredLocalStorageBooksCount,
+  totalBooksCount,
+  readingListBooksCount,
 }) => {
   const getSpanClass = (isSelected) => {
     return `cursor-pointer px-4 py-1 ${
@@ -17,13 +17,13 @@ export const Navbar = ({
         onClick={() => setShowList(false)}
         className={getSpanClass(!showList)}
       >
-        Libros disponibles ({filteredBooksCount})
+        Libros disponibles ({totalBooksCount})
       </span>
       <span
         onClick={() => setShowList(true)}
         className={getSpanClass(showList)}
       >
-        Lista de lectura ({filteredLocalStorageBooksCount})
+        Lista de lectura ({readingListBooksCount})
       </span>
     </nav>
   );

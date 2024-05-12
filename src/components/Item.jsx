@@ -1,31 +1,38 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AddBook, DeleteBook } from "../Icons";
-import {
-  addBookToLocalStorage,
-  removeBookFromLocalStorage,
-  bookExistsInLocalStorage,
-} from "../helper/localStorageHelper";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 /* eslint-disable react/prop-types */
-export const Item = ({ book: item, onClick }) => {
-  const { title, synopsis, genre, cover, ISBN } = item;
-
-  const [isInLocalStorage, setIsInLocalStorage] = useState(
-    bookExistsInLocalStorage(ISBN)
+export const Item = ({ book: item, onClick, setReadingListBookCount }) => {
+  const { title, synopsis, genre, cover } = item;
+  const { isInLocalStorage, handleAddRemoveBook } = useLocalStorage(
+    item,
+    setReadingListBookCount
   );
-
-  const handleAddRemoveBook = () => {
-    if (isInLocalStorage) {
-      removeBookFromLocalStorage(ISBN);
-    } else {
-      addBookToLocalStorage(item);
-    }
-    setIsInLocalStorage(!isInLocalStorage);
-  };
+  const [cachedCover, setCachedCover] = useState(null);
 
   useEffect(() => {
-    setIsInLocalStorage(bookExistsInLocalStorage(ISBN));
-  }, [ISBN]);
+    const cacheImage = async (url) => {
+      try {
+        const cachedImage = localStorage.getItem(url);
+        if (cachedImage) {
+          setCachedCover(cachedImage);
+          return;
+        }
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        localStorage.setItem(url, imageUrl);
+        setCachedCover(imageUrl);
+      } catch (error) {
+        console.error("Error al almacenar en caché la imagen:", error);
+      }
+    };
+
+    if (!cachedCover) {
+      cacheImage(cover);
+    }
+  }, [cover, cachedCover]);
 
   return (
     <article className="flex flex-col items-center gap-2">
