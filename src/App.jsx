@@ -6,7 +6,6 @@ import { List } from "./components/List";
 import { Filter } from "./components/Filter";
 import { ItemDetails } from "./components/ItemDetails";
 import { getBooksFromLocalStorage } from "./helper/localStorageHelper";
-
 function App() {
   const [showList, setShowList] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

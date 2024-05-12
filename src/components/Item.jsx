@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { AddBook, DeleteBook } from "../Icons";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -9,30 +8,6 @@ export const Item = ({ book: item, onClick, setReadingListBookCount }) => {
     item,
     setReadingListBookCount
   );
-  const [cachedCover, setCachedCover] = useState(null);
-
-  useEffect(() => {
-    const cacheImage = async (url) => {
-      try {
-        const cachedImage = localStorage.getItem(url);
-        if (cachedImage) {
-          setCachedCover(cachedImage);
-          return;
-        }
-        const response = await fetch(url);
-        const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
-        localStorage.setItem(url, imageUrl);
-        setCachedCover(imageUrl);
-      } catch (error) {
-        console.error("Error al almacenar en caché la imagen:", error);
-      }
-    };
-
-    if (!cachedCover) {
-      cacheImage(cover);
-    }
-  }, [cover, cachedCover]);
 
   return (
     <article className="flex flex-col items-center gap-2">
@@ -53,6 +28,7 @@ export const Item = ({ book: item, onClick, setReadingListBookCount }) => {
         </h2>
         <button
           className="flex justify-center items-center h-8 min-w-8 rounded-md bg-zinc-800"
+          aria-label="Guardar"
           onClick={handleAddRemoveBook}
         >
           {isInLocalStorage ? <DeleteBook /> : <AddBook />}

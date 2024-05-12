@@ -19,6 +19,7 @@ export const ItemDetails = ({
       <div className="relative">
         <button
           className="absolute flex justify-center items-center h-8 min-w-8 rounded-md bg-zinc-800 top-1 left-1"
+          aria-label="Retornar"
           onClick={() => handleItemClick(null)}
         >
           <Return className="cursor-pointer" />
@@ -41,6 +42,7 @@ export const ItemDetails = ({
         <p className="btn-genre">{genre}</p>
         <button
           className="flex justify-center items-center h-8 max-w-8 rounded-md bg-zinc-800"
+          aria-label="Guardar"
           onClick={handleAddRemoveBook}
         >
           {isInLocalStorage ? <DeleteBook /> : <AddBook />}
