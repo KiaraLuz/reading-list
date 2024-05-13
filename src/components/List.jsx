@@ -17,6 +17,7 @@ export const List = ({
   useEffect(() => {
     setReadingListBooksCount(filteredBooksCount);
   }, [filteredBooksCount]);
+
   return (
     <section className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 relative">
       {isLoading && <p className="absolute top-5">Cargando...</p>}
