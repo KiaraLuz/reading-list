@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Header } from "./components/Header";
-import { Items } from "./components/Items";
-import { Navbar } from "./components/Navbar";
-import { List } from "./components/List";
-import { Filter } from "./components/Filter";
-import { ItemDetails } from "./components/ItemDetails";
-import { getBooksFromLocalStorage } from "./helper/localStorageHelper";
+import { Header } from "./components/Header.jsx";
+import { Items } from "./components/Items.jsx";
+import { Navbar } from "./components/Navbar.jsx";
+import { List } from "./components/List.jsx";
+import { Filter } from "./components/Filter.jsx";
+import { ItemDetails } from "./components/ItemDetails.jsx";
+import { getBooksFromLocalStorage } from "./helper/localStorageHelper.js";
 function App() {
   const [showList, setShowList] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

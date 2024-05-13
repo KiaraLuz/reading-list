@@ -1,4 +1,4 @@
-import { Search } from "../Icons";
+import { Search } from "../Icons.jsx";
 
 /* eslint-disable react/prop-types */
 export const Filter = ({ handleSearchChange }) => {

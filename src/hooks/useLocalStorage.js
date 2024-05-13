@@ -4,7 +4,7 @@ import {
   removeBookFromLocalStorage,
   bookExistsInLocalStorage,
   getBooksFromLocalStorage,
-} from "../helper/localStorageHelper";
+} from "../helper/localStorageHelper.js";
 
 export const useLocalStorage = (book, setReadingListBooksCount) => {
   const { ISBN } = book;

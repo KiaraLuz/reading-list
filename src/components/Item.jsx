@@ -1,5 +1,5 @@
-import { AddBook, DeleteBook } from "../Icons";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { AddBook, DeleteBook } from "../Icons.jsx";
+import { useLocalStorage } from "../hooks/useLocalStorage.js";
 
 /* eslint-disable react/prop-types */
 export const Item = ({ book: item, onClick, setReadingListBookCount }) => {

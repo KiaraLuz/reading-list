@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
-import { useSearch } from "../hooks/useSearch";
+import { useSearch } from "../hooks/useSearch.js";
 import data from "./../data/books.json";
-import { Item } from "./Item";
+import { Item } from "./Item.jsx";
 
 export const Items = ({
   searchQuery,

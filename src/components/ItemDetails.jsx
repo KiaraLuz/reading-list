@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { AddBook, DeleteBook, Return } from "../Icons";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { AddBook, DeleteBook, Return } from "../Icons.jsx";
+import { useLocalStorage } from "../hooks/useLocalStorage.js";
 
 export const ItemDetails = ({
   handleItemClick,

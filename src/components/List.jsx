@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
-import { Item } from "./Item";
-import { getBooksFromLocalStorage } from "./../helper/localStorageHelper";
-import { useSearch } from "../hooks/useSearch";
+import { Item } from "./Item.jsx";
+import { getBooksFromLocalStorage } from "./../helper/localStorageHelper.js";
+import { useSearch } from "../hooks/useSearch.js";
 
 export const List = ({
   searchQuery,
