@@ -1,9 +1,9 @@
 export const saveBooksToLocalStorage = (books) => {
-  localStorage.setItem("books", JSON.stringify(books));
+  localStorage.setItem("library", JSON.stringify(books));
 };
 
 export const getBooksFromLocalStorage = () => {
-  const books = localStorage.getItem("books");
+  const books = localStorage.getItem("library");
   return books ? JSON.parse(books) : [];
 };
 
