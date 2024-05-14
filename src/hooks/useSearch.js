@@ -11,14 +11,16 @@ export const useSearch = (initialData, searchQuery) => {
       });
       setSearchResults(filteredData);
       setFilteredBooksCount(filteredData.length);
-    } else {
-      setSearchResults(initialData);
-      setFilteredBooksCount(initialData.length);
     }
   }
 
   useEffect(() => {
-    if (searchQuery.trim()) search(searchQuery.trim());
+    if (searchQuery.trim()) {
+      search(searchQuery.trim());
+    } else {
+      setSearchResults(initialData);
+      setFilteredBooksCount(initialData.length);
+    }
   }, [searchQuery]);
 
   return { searchResults, filteredBooksCount };
