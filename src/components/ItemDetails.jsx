@@ -18,7 +18,7 @@ export const ItemDetails = ({
     <section className="flex gap-8">
       <div className="relative">
         <button
-          className="absolute flex justify-center items-center h-8 min-w-8 rounded-md bg-zinc-800 top-1 left-1"
+          className="absolute flex justify-center items-center h-8 min-w-8 rounded-md bg-zinc-800 top-1 left-1 z-10"
           aria-label="Retornar"
           onClick={() => handleItemClick(null)}
         >
