@@ -6,6 +6,7 @@ import { Item } from "./Item.jsx";
 
 export const Items = ({
   searchName,
+  searchGenre,
   handleItemClick,
   setTotalBooksCount,
   setReadingListBooksCount,
@@ -14,7 +15,8 @@ export const Items = ({
     data.library.map((book) => {
       return book.book;
     }),
-    searchName
+    searchName,
+    searchGenre
   );
 
   useEffect(() => {

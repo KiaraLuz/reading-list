@@ -6,12 +6,14 @@ import { useSearch } from "../hooks/useSearch.js";
 
 export const List = ({
   searchName,
+  searchGenre,
   handleItemClick,
   setReadingListBooksCount,
 }) => {
   const { searchResults, filteredBooksCount } = useSearch(
     getBooksFromLocalStorage(),
-    searchName
+    searchName,
+    searchGenre
   );
 
   useEffect(() => {

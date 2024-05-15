@@ -7,17 +7,16 @@ import { Filter } from "./components/Filter.jsx";
 import { ItemDetails } from "./components/ItemDetails.jsx";
 import { getBooksFromLocalStorage } from "./helper/localStorageHelper.js";
 function App() {
-  const [showList, setShowList] = useState(false);
   const [searchName, setSearchName] = useState("");
+  const [searchGenre, setSearchGenre] = useState("");
+
+  const [showList, setShowList] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+
   const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [readingListBooksCount, setReadingListBooksCount] = useState(
     getBooksFromLocalStorage().length
   );
-
-  const handleSearchChange = (event) => {
-    setSearchName(event.target.value);
-  };
 
   const handleItemClick = (book) => {
     setSelectedBook(book);
@@ -26,7 +25,7 @@ function App() {
   return (
     <>
       <Header />
-      <Filter handleSearchChange={handleSearchChange} />
+      <Filter setSearchName={setSearchName} setSearchGenre={setSearchGenre} />
       <Navbar
         showList={showList}
         setShowList={setShowList}
@@ -38,6 +37,7 @@ function App() {
           !selectedBook ? (
             <Items
               searchName={searchName}
+              searchGenre={searchGenre}
               handleItemClick={handleItemClick}
               setTotalBooksCount={setTotalBooksCount}
               setReadingListBooksCount={setReadingListBooksCount}
@@ -52,6 +52,7 @@ function App() {
         ) : (
           <List
             searchName={searchName}
+            searchGenre={searchGenre}
             handleItemClick={handleItemClick}
             setReadingListBooksCount={setReadingListBooksCount}
           />
