@@ -8,7 +8,7 @@ import { ItemDetails } from "./components/ItemDetails.jsx";
 import { getBooksFromLocalStorage } from "./helper/localStorageHelper.js";
 function App() {
   const [showList, setShowList] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchName, setSearchName] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [readingListBooksCount, setReadingListBooksCount] = useState(
@@ -16,7 +16,7 @@ function App() {
   );
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+    setSearchName(event.target.value);
   };
 
   const handleItemClick = (book) => {
@@ -37,7 +37,7 @@ function App() {
         {!showList ? (
           !selectedBook ? (
             <Items
-              searchQuery={searchQuery}
+              searchName={searchName}
               handleItemClick={handleItemClick}
               setTotalBooksCount={setTotalBooksCount}
               setReadingListBooksCount={setReadingListBooksCount}
@@ -51,7 +51,7 @@ function App() {
           )
         ) : (
           <List
-            searchQuery={searchQuery}
+            searchName={searchName}
             handleItemClick={handleItemClick}
             setReadingListBooksCount={setReadingListBooksCount}
           />

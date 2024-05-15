@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-export const useSearch = (initialData, searchQuery) => {
+export const useSearch = (initialData, searchName) => {
   const [searchResults, setSearchResults] = useState(initialData);
   const [filteredBooksCount, setFilteredBooksCount] = useState(0);
 
-  function search(query) {
+  function searchByName(query) {
     if (query) {
       const filteredData = initialData.filter((book) => {
         return book.title.toLowerCase().includes(query.toLowerCase());
@@ -15,13 +15,13 @@ export const useSearch = (initialData, searchQuery) => {
   }
 
   useEffect(() => {
-    if (searchQuery.trim()) {
-      search(searchQuery.trim());
+    if (searchName.trim()) {
+      searchByName(searchName.trim());
     } else {
       setSearchResults(initialData);
       setFilteredBooksCount(initialData.length);
     }
-  }, [searchQuery]);
+  }, [searchName]);
 
   return { searchResults, filteredBooksCount };
 };

@@ -5,13 +5,13 @@ import { getBooksFromLocalStorage } from "./../helper/localStorageHelper.js";
 import { useSearch } from "../hooks/useSearch.js";
 
 export const List = ({
-  searchQuery,
+  searchName,
   handleItemClick,
   setReadingListBooksCount,
 }) => {
   const { searchResults, filteredBooksCount } = useSearch(
     getBooksFromLocalStorage(),
-    searchQuery
+    searchName
   );
 
   useEffect(() => {
