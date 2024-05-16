@@ -26,6 +26,16 @@
   background-color: rgb(30, 30, 30);
 }
 
+.input-filter {
+  background-color: rgb(39, 39, 42);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.input-filter:focus {
+  outline: none;
+}
+
 body::-webkit-scrollbar {
   width: 8px;
 }

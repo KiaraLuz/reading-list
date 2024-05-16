@@ -17,7 +17,7 @@ export const Filter = ({ setSearchName, setSearchGenre }) => {
       <div className="flex gap-2 items-center justify-start bg-zinc-800 rounded-md px-2 py-1 w-full sm:w-1/3">
         <Search />
         <input
-          className="bg-zinc-800 focus:outline-none w-full"
+          className="input-filter w-full"
           placeholder="Buscar libro..."
           onChange={handleSearchChange}
         />
@@ -25,10 +25,7 @@ export const Filter = ({ setSearchName, setSearchGenre }) => {
 
       <div className="flex gap-2 items-center">
         <p>Selecciona un género:</p>
-        <select
-          className="bg-zinc-800 focus:outline-none py-1 px-2 rounded-md"
-          onChange={handleGenreChange}
-        >
+        <select className="input-filter" onChange={handleGenreChange}>
           <option value="">Todos</option>
           {genres.map((genre, index) => (
             <option key={index} value={genre}>
