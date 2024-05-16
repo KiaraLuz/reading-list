@@ -13,11 +13,11 @@ export const Filter = ({ setSearchName, setSearchGenre }) => {
   };
 
   return (
-    <form className="py-2 flex flex-col gap-4 sm:flex-row">
-      <div className="flex gap-2 items-center justify-start bg-zinc-800 rounded-md px-2 py-1 w-full sm:w-1/3">
+    <form className="py-2 flex flex-col gap-4">
+      <div className="flex gap-2 items-center input-filter w-full sm:w-1/2">
         <Search />
         <input
-          className="input-filter w-full"
+          className="bg-transparent focus:outline-none w-full"
           placeholder="Buscar libro..."
           onChange={handleSearchChange}
         />

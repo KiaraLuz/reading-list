@@ -27,7 +27,7 @@ export const useSearch = (initialData, searchName, searchGenre) => {
 
   function searchByGenre(query) {
     if (query) {
-      const filteredData = initialData.filter((book) => {
+      const filteredData = searchResults.filter((book) => {
         return book.genre.toLowerCase().includes(query.toLowerCase());
       });
       setSearchResults(filteredData);
